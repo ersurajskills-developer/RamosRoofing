@@ -1,0 +1,223 @@
+/* ==========================================================================
+   Ramos Roofing Plus - Main Javascript Logic
+   ========================================================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Sticky Header
+  const header = document.querySelector('.main-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  // 2. Mobile Menu Toggle
+  const hamburger = document.querySelector('.hamburger');
+  const navMenu = document.querySelector('.nav-menu');
+  if (hamburger && navMenu) {
+    hamburger.addEventListener('click', () => {
+      // Toggle menu visibility (class active)
+      navMenu.classList.toggle('mobile-active');
+      const isExpanded = navMenu.classList.contains('mobile-active');
+      hamburger.innerHTML = isExpanded ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+    });
+
+    // Mobile dropdown toggle logic
+    const dropdowns = navMenu.querySelectorAll('.dropdown, .mega-dropdown');
+    dropdowns.forEach(dropdown => {
+      const link = dropdown.querySelector('.nav-link');
+      if (link) {
+        link.addEventListener('click', (e) => {
+          if (window.innerWidth <= 1150) {
+            e.preventDefault(); // prevent navigation on top level
+            dropdown.classList.toggle('mobile-active');
+          }
+        });
+      }
+    });
+  }
+
+  // 3. SMS Chat Widget Toggle & Submission
+  const widgetTrigger = document.querySelector('.sms-widget-trigger');
+  const widgetBox = document.querySelector('.sms-widget-box');
+  const widgetClose = document.querySelector('.sms-widget-close');
+  const smsForm = document.querySelector('.sms-widget-form');
+
+  if (widgetTrigger && widgetBox) {
+    widgetTrigger.addEventListener('click', () => {
+      widgetBox.classList.add('active');
+    });
+  }
+
+  if (widgetClose && widgetBox) {
+    widgetClose.addEventListener('click', () => {
+      widgetBox.classList.remove('active');
+    });
+  }
+
+  if (smsForm) {
+    smsForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('sms-name').value;
+      const phone = document.getElementById('sms-phone').value;
+      const message = document.getElementById('sms-message').value;
+
+      console.log(`[SMS LEAD CAPTURE] Routing lead to Brandon @ (479) 652-1424`);
+      console.log(`Lead Details - Name: ${name}, Phone: ${phone}, Inquiry: ${message}`);
+
+      // AJAX submission to Netlify Forms
+      const formData = new URLSearchParams();
+      formData.append("form-name", "sms-widget");
+      formData.append("name", name);
+      formData.append("phone", phone);
+      formData.append("message", message);
+      
+      // Add honeypot value if filled (usually blank)
+      const botField = smsForm.querySelector('input[name="bot-field"]');
+      if (botField && botField.value) {
+        formData.append("bot-field", botField.value);
+      }
+
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: formData.toString()
+      })
+      .then(() => {
+        console.log("Successfully submitted SMS chat lead to Netlify Forms.");
+      })
+      .catch((error) => {
+        console.error("Netlify Form submission failed:", error);
+      });
+
+      // Show success bubble in chat widget
+      const body = document.querySelector('.sms-widget-body');
+      body.innerHTML = `
+        <div class="sms-bubble" style="border-radius: 16px; background-color: rgba(197,160,89,0.1); border-color: var(--accent-primary);">
+          <p style="color: #fff; font-weight: 600;">Thank you, ${name}!</p>
+          <p style="margin-top: 8px; font-size: 0.85rem;">Your message has been sent directly to our operations rep Brandon. We'll text or call you back shortly!</p>
+        </div>
+      `;
+      smsForm.style.display = 'none';
+    });
+  }
+
+  // 4. FAQ Accordion Logic
+  const faqQuestions = document.querySelectorAll('.faq-question');
+  faqQuestions.forEach(question => {
+    question.addEventListener('click', () => {
+      const card = question.parentElement;
+      const isActive = card.classList.contains('active');
+
+      // Close all other FAQs
+      document.querySelectorAll('.faq-card').forEach(otherCard => {
+        otherCard.classList.remove('active');
+      });
+
+      // Toggle current
+      if (!isActive) {
+        card.classList.add('active');
+      }
+    });
+  });
+
+  // 5. Star Rating Redirect Logic (Review Page)
+  const starBtns = document.querySelectorAll('.star-input-btn');
+  const ratingValueInput = document.getElementById('rating-value');
+  const feedbackForm = document.querySelector('.review-form-container');
+  const redirectBox = document.querySelector('.rating-redirect-box');
+  const actualForm = document.querySelector('.feedback-direct-form');
+
+  if (starBtns.length > 0) {
+    starBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const rating = parseInt(btn.getAttribute('data-val'), 10);
+        
+        // Reset stars styling
+        starBtns.forEach(s => s.classList.remove('active'));
+        for (let i = 0; i < rating; i++) {
+          starBtns[i].classList.add('active');
+        }
+
+        if (ratingValueInput) ratingValueInput.value = rating;
+
+        // Routing logic
+        if (rating >= 4) {
+          // Positive reviews (4-5 stars) -> Show Google Redirect link
+          feedbackForm.classList.remove('active');
+          redirectBox.classList.add('active');
+        } else {
+          // Negative/Neutral reviews (1-3 stars) -> Show private feedback form
+          redirectBox.classList.remove('active');
+          feedbackForm.classList.add('active');
+        }
+      });
+    });
+  }
+
+  if (actualForm) {
+    actualForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('feedback-name').value;
+      const phone = document.getElementById('feedback-phone').value;
+      const comments = document.getElementById('feedback-comments').value;
+      const rating = ratingValueInput ? ratingValueInput.value : 'unknown';
+
+      console.log(`[PRIVATE FEEDBACK CAPTURE] Routing low rating alert (Rating: ${rating}/5) to Austin @ (479) 221-8420`);
+      console.log(`Feedback Details - Name: ${name}, Phone: ${phone}, Comments: ${comments}`);
+
+      // AJAX submission to Netlify Forms
+      const formData = new URLSearchParams();
+      formData.append("form-name", "customer-feedback");
+      formData.append("name", name);
+      formData.append("phone", phone);
+      formData.append("comments", comments);
+      formData.append("rating", rating);
+      
+      // Add honeypot value if filled (usually blank)
+      const botField = actualForm.querySelector('input[name="bot-field"]');
+      if (botField && botField.value) {
+        formData.append("bot-field", botField.value);
+      }
+
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: formData.toString()
+      })
+      .then(() => {
+        console.log("Successfully submitted customer feedback to Netlify Forms.");
+      })
+      .catch((error) => {
+        console.error("Netlify Form submission failed:", error);
+      });
+
+      const widgetCard = document.querySelector('.rating-widget-card');
+      widgetCard.innerHTML = `
+        <div style="padding: 20px; text-align: center;">
+          <i class="fas fa-check-circle" style="font-size: 3.5rem; color: var(--accent-hover); margin-bottom: 20px;"></i>
+          <h3 style="font-size: 1.8rem; margin-bottom: 12px; font-family: var(--font-headings);">Thank You for Your Feedback</h3>
+          <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto 30px auto;">
+            We appreciate your feedback. Austin Ramos (Owner) has been notified directly at his office. We will call you back to resolve any issues.
+          </p>
+        </div>
+      `;
+    });
+  }
+
+  // 6. Fix "Request Service" button on non-home pages
+  const requestButtons = document.querySelectorAll('.btn-request');
+  requestButtons.forEach(btn => {
+    const path = window.location.pathname;
+    const isHome = path === '/' || path.endsWith('/index.html') || path.endsWith('/') || path === '';
+    if (!isHome) {
+      if (path.includes('/services/') || path.includes('/locations/') || path.includes('/resources/')) {
+        btn.href = '../index.html#quote-form';
+      } else {
+        btn.href = 'index.html#quote-form';
+      }
+    }
+  });
+});
