@@ -2090,7 +2090,7 @@ img {
     grid-template-columns: 1fr;
   }
 
-  .footer-bottom {
+  .footer-bottom-container {
     flex-direction: column;
     gap: 16px;
     text-align: center;
