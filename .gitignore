@@ -18,3 +18,4 @@ Desktop.ini
 # Ignore raw media assets (to avoid exceeding GitHub's 100MB file size limit)
 /Images/*
 !/Images/compressed/
+!/Images/before-after/
