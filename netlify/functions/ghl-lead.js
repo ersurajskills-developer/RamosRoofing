@@ -48,17 +48,18 @@ exports.handler = async (event) => {
   const email = (data.email || '').trim();
   const message = (data.message || '').trim();
 
-  if (!name || !phone) {
-    return { statusCode: 400, body: JSON.stringify({ error: 'Name and phone are required.' }) };
+  // Phone is optional, but GHL still needs at least one way to reach the lead.
+  if (!name || (!phone && !email)) {
+    return { statusCode: 400, body: JSON.stringify({ error: 'Please provide your name and a phone number or email.' }) };
   }
 
   const payload = {
     locationId: LOCATION_ID,
     name: name,
-    phone: normalizePhone(phone),
     source: 'Website Quote Form',
     tags: [LEAD_TAG],
   };
+  if (phone) payload.phone = normalizePhone(phone);
   if (email) payload.email = email;
   if (message) payload.customFields = [{ id: MESSAGE_FIELD_ID, value: message }];
 
