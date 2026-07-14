@@ -693,12 +693,9 @@
           </div>
           <h3 style="font-family: var(--font-headings); font-size: 1.8rem; color: var(--text-primary); margin-bottom: 24px; text-transform: uppercase; text-align: center;">GET A FREE QUOTE</h3>
           
-          <form action="https://formsubmit.co/ramosroofing.ar@icloud.com" method="POST" id="estimate-request-form">
-            <!-- FormSubmit configuration -->
-            <input type="text" name="_honey" style="display:none">
-            <input type="hidden" name="_next" value="https://ramosroofingplus.com/">
-            <input type="hidden" name="_subject" value="New Estimate Request - Ramos Roofing Plus">
-            <input type="hidden" name="_captcha" value="false">
+          <form id="estimate-request-form">
+            <!-- Honeypot: hidden from real users; bots that fill it are silently dropped -->
+            <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
             <div class="grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 20px;">
               <div class="form-group" style="margin-bottom: 0;">
                 <label for="est-name" class="form-label">Full Name *</label>

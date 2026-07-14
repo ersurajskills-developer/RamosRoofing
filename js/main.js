@@ -104,6 +104,64 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // 3b. Estimate Request Form -> GoHighLevel (via secure Netlify function)
+  const estimateForm = document.getElementById('estimate-request-form');
+  if (estimateForm) {
+    estimateForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const submitBtn = estimateForm.querySelector('button[type="submit"]');
+      const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'SENDING...';
+      }
+
+      const honeypot = estimateForm.querySelector('input[name="company"]');
+      const payload = {
+        name: document.getElementById('est-name').value,
+        phone: document.getElementById('est-phone').value,
+        email: document.getElementById('est-email').value,
+        message: document.getElementById('est-details').value,
+        company: honeypot ? honeypot.value : ''
+      };
+
+      fetch('/.netlify/functions/ghl-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then((res) => {
+        if (!res.ok) throw new Error('Request failed');
+        return res.json();
+      })
+      .then(() => {
+        const card = estimateForm.closest('.rating-widget-card');
+        if (card) {
+          card.innerHTML = `
+            <div style="padding: 30px 10px; text-align: center;">
+              <i class="fas fa-check-circle" style="font-size: 3.5rem; color: var(--accent-hover); margin-bottom: 20px;"></i>
+              <h3 style="font-size: 1.8rem; margin-bottom: 12px; font-family: var(--font-headings);">Request Received</h3>
+              <p style="color: var(--text-secondary); max-width: 420px; margin: 0 auto;">
+                Thanks, ${payload.name}! Brandon Ramos will personally reach out within 24 hours to schedule your free inspection.
+              </p>
+            </div>
+          `;
+        } else {
+          estimateForm.reset();
+        }
+      })
+      .catch((error) => {
+        console.error('Lead submission failed:', error);
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnText;
+        }
+        alert("Sorry, something went wrong sending your request. Please call us at (479) 652-1424 or try again.");
+      });
+    });
+  }
+
   // 4. FAQ Accordion Logic
   const faqQuestions = document.querySelectorAll('.faq-question');
   faqQuestions.forEach(question => {
