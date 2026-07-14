@@ -891,60 +891,7 @@
   <script src="js/sliders.js"></script>
   
 
-  <script>
-    // Handle estimate request form submission
-    const estForm = document.getElementById('estimate-request-form');
-    if (estForm) {
-      estForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = document.getElementById('est-name').value;
-        const phone = document.getElementById('est-phone').value;
-        const email = document.getElementById('est-email').value;
-        const details = document.getElementById('est-details').value;
-        
-        console.log(`[ESTIMATE REQUEST] Routing to Brandon @ (479) 652-1424`);
-        console.log(`Lead Details: Name=${name}, Phone=${phone}, Email=${email}`);
-        
-        // AJAX submission to FormSubmit.co
-        fetch("https://formsubmit.co/ajax/ramosroofing.ar@icloud.com", {
-          method: "POST",
-          headers: { 
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          },
-          body: JSON.stringify({
-            "Form Name": "Estimate Quote Request",
-            "Name": name,
-            "Phone": phone,
-            "Email": email,
-            "Details": details,
-            "_subject": "New Estimate Request - Ramos Roofing Plus"
-          })
-        })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error("FormSubmit returned an error status.");
-          }
-          return response.json();
-        })
-        .then(() => {
-          console.log("Successfully submitted estimate request to FormSubmit.");
-          const card = estForm.parentElement;
-          card.innerHTML = `
-            <div style="text-align: center; padding: 40px 0;">
-              <i class="fas fa-check-circle" style="font-size: 3.5rem; color: var(--cta-primary); margin-bottom: 20px;"></i>
-              <h3 style="font-family: var(--font-headings); font-size: 1.8rem; margin-bottom: 12px; color: var(--text-primary);">Quote Request Received!</h3>
-              <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto; line-height: 1.6;">Thank you, ${name}. Brandon Ramos will review your request and text or call you at ${phone} within 24 hours.</p>
-            </div>
-          `;
-        })
-        .catch((error) => {
-          console.error("FormSubmit submission failed:", error);
-          alert("Submission failed. This email address has not been activated on FormSubmit yet, or there was a connection error. Please make sure the owner clicks 'Activate Form' in the email from FormSubmit.co.");
-        });
-      });
-    }
-  </script>
+
   <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a4df7db3d80798f75485571"></script>
 </body>
 </html>
