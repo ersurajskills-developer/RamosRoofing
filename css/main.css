@@ -283,9 +283,8 @@ img {
 
 /* Main Header Navigation */
 .main-header {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
   width: 100%;
   height: 90px;
   background-color: transparent;
@@ -293,6 +292,7 @@ img {
   display: flex;
   align-items: center;
   z-index: 1000;
+  margin-bottom: -90px;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -1893,6 +1893,7 @@ img {
 @media (max-width: 1150px) {
   .main-header {
     height: 75px;
+    margin-bottom: -75px;
   }
 
   .site-logo-img {
