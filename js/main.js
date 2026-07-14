@@ -5,13 +5,17 @@
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Sticky Header
   const header = document.querySelector('.main-header');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
+
+  function updateHeader() {
+    if (window.scrollY > 10) {
       header.classList.add('scrolled');
     } else {
       header.classList.remove('scrolled');
     }
-  });
+  }
+
+  window.addEventListener('scroll', updateHeader);
+  updateHeader(); // run once on load so the state is correct immediately
 
   // 2. Mobile Menu Toggle
   const hamburger = document.querySelector('.hamburger');
