@@ -311,8 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 6. Fix "Request Service" button on non-home pages
-  const requestButtons = document.querySelectorAll('.btn-request');
-  requestButtons.forEach(btn => {
+  document.querySelectorAll('.btn-request').forEach(btn => {
     const path = window.location.pathname;
     const isHome = path === '/' || path.endsWith('/index.html') || path.endsWith('/') || path === '';
     if (!isHome) {
