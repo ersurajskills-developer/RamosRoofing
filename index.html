@@ -44,8 +44,8 @@
         <a href="tel:4796521424" style="color: #ffffff; font-weight: 700; text-decoration: none; margin-left: 4px;">(479) 652-1424</a>
       </div>
       <div class="top-bar-right">
-        <span><i class="fas fa-clock"></i> Hours: 8:00 AM – 8:00 PM</span>
-        <span style="margin-left: 16px;"><i class="fas fa-certificate"></i> Established 2000 (25 Years of Service)</span>
+        <span><i class="fas fa-clock"></i> Mon–Fri: 8:00 AM – 6:00 PM &nbsp;|&nbsp; Sat: 8:00 AM – 3:00 PM &nbsp;|&nbsp; Sun: Closed</span>
+        <span style="margin-left: 16px;"><i class="fas fa-certificate"></i> Established 2000</span>
       </div>
     </div>
   </div>
@@ -187,8 +187,7 @@
     
     <div class="hero-content">
       <div class="hero-text">
-        <span class="hero-tagline">25 Years of Architectural Splicing</span>
-        <h1>Arkansas & Oklahoma's <span>Trusted</span> Roofing Experts for 25 Years.</h1>
+        <h1>Arkansas & Oklahoma's <span>Trusted</span> Roofing Experts.</h1>
         <p>Premium shingle, standing seam metal, TPO commercial flat roofing, and siding custom installations built for homes and businesses in NWA and the River Valley.</p>
         <div class="hero-ctas">
           <a href="#quote-form" class="btn btn-primary" style="background-color: var(--cta-primary); border-color: var(--cta-primary);">Request Free Estimate <i class="fas fa-calculator"></i></a>
@@ -694,10 +693,12 @@
           </div>
           <h3 style="font-family: var(--font-headings); font-size: 1.8rem; color: var(--text-primary); margin-bottom: 24px; text-transform: uppercase; text-align: center;">GET A FREE QUOTE</h3>
           
-          <form action="#" method="POST" id="estimate-request-form" name="estimate-request" data-netlify="true">
-            <p style="display:none">
-              <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-            </p>
+          <form action="https://formsubmit.co/ramosroofing.ar@icloud.com" method="POST" id="estimate-request-form">
+            <!-- FormSubmit configuration -->
+            <input type="text" name="_honey" style="display:none">
+            <input type="hidden" name="_next" value="https://ramosroofingplus.com/">
+            <input type="hidden" name="_subject" value="New Estimate Request - Ramos Roofing Plus">
+            <input type="hidden" name="_captcha" value="false">
             <div class="grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 20px;">
               <div class="form-group" style="margin-bottom: 0;">
                 <label for="est-name" class="form-label">Full Name *</label>
@@ -806,23 +807,35 @@
       <!-- Column 3: Contact Info -->
       <div class="footer-column">
         <h3>Contact Info</h3>
-        <ul class="footer-links" style="display: flex; flex-direction: column; gap: 14px;">
-          <li style="display: flex; align-items: flex-start; gap: 10px; color: rgba(255,255,255,0.75);">
-            <i class="fas fa-map-marker-alt" style="color: var(--cta-primary); margin-top: 4px; font-size: 1.05rem;"></i>
-            <span>2001 S Z St,<br>Fort Smith, AR 72901</span>
-          </li>
-          <li style="display: flex; align-items: flex-start; gap: 10px; color: rgba(255,255,255,0.75);">
-            <i class="fas fa-phone-alt" style="color: var(--cta-primary); margin-top: 4px; font-size: 1.05rem;"></i>
-            <span>
-              Brandon: <a href="tel:4796521424" style="color: inherit !important; text-decoration: none;">(479) 652-1424</a><br>
-              Austin: <a href="tel:4792218420" style="color: inherit !important; text-decoration: none;">(479) 221-8420</a>
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.06); padding: 18px; border-radius: var(--border-radius-sm); display: flex; flex-direction: column; gap: 14px; max-width: 290px;">
+          <div style="display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.75); font-size: 0.88rem;">
+            <i class="fas fa-phone-alt" style="color: var(--cta-primary); font-size: 0.85rem; width: 16px; text-align: center;"></i>
+            <span style="line-height: 1.3;">
+              <span style="font-size: 0.75rem; color: rgba(255,255,255,0.4); text-transform: uppercase; font-weight: 700; display: block; letter-spacing: 0.5px;">Brandon (Main)</span>
+              <a href="tel:4796521424" style="color: #ffffff !important; text-decoration: none; font-weight: 600; font-size: 0.95rem;">(479) 652-1424</a>
             </span>
-          </li>
-          <li style="display: flex; align-items: flex-start; gap: 10px; color: rgba(255,255,255,0.75);">
-            <i class="fas fa-envelope" style="color: var(--cta-primary); margin-top: 4px; font-size: 1.05rem;"></i>
-            <span><a href="mailto:austin.ramos5@gmail.com" style="color: inherit !important; text-decoration: none;">austin.ramos5@gmail.com</a></span>
-          </li>
-        </ul>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.75); font-size: 0.88rem;">
+            <i class="fas fa-phone-alt" style="color: var(--cta-primary); font-size: 0.85rem; width: 16px; text-align: center;"></i>
+            <span style="line-height: 1.3;">
+              <span style="font-size: 0.75rem; color: rgba(255,255,255,0.4); text-transform: uppercase; font-weight: 700; display: block; letter-spacing: 0.5px;">Austin</span>
+              <a href="tel:4796521169" style="color: #ffffff !important; text-decoration: none; font-weight: 600; font-size: 0.95rem;">(479) 652-1169</a>
+            </span>
+          </div>
+          <div style="height: 1px; background: rgba(255,255,255,0.08); margin: 2px 0;"></div>
+          <div style="display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.75); font-size: 0.85rem;">
+            <i class="fas fa-envelope" style="color: var(--cta-primary); font-size: 0.85rem; width: 16px; text-align: center;"></i>
+            <span><a href="mailto:ramosroofing.ar@icloud.com" style="color: inherit !important; text-decoration: none;">ramosroofing.ar@icloud.com</a></span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.75); font-size: 0.85rem;">
+            <i class="fas fa-envelope" style="color: var(--cta-primary); font-size: 0.85rem; width: 16px; text-align: center;"></i>
+            <span><a href="mailto:ramosroofing.vo@icloud.com" style="color: inherit !important; text-decoration: none;">ramosroofing.vo@icloud.com</a></span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.75); font-size: 0.85rem;">
+            <i class="fas fa-envelope" style="color: var(--cta-primary); font-size: 0.85rem; width: 16px; text-align: center;"></i>
+            <span><a href="mailto:office@ramosroofings.com" style="color: inherit !important; text-decoration: none;">office@ramosroofings.com</a></span>
+          </div>
+        </div>
       </div>
       
       <!-- Column 4: Business Hours / Emergency -->
@@ -831,15 +844,19 @@
         <div class="footer-hours-grid">
           <div class="hours-row">
             <span class="days">Monday - Friday</span>
-            <span class="time">8:00 AM - 8:00 PM</span>
+            <span class="time">8:00 AM - 6:00 PM</span>
+          </div>
+          <div class="hours-row">
+            <span class="days">Saturday</span>
+            <span class="time">8:00 AM - 3:00 PM</span>
+          </div>
+          <div class="hours-row">
+            <span class="days">Sunday</span>
+            <span class="time" style="color: #ef4444; font-weight: 600;">Closed</span>
           </div>
           <div class="hours-row highlight">
             <span class="days">24/7 Emergency</span>
             <span class="time">Open Call Center</span>
-          </div>
-          <div class="hours-row">
-            <span class="days">Weekends</span>
-            <span class="time">By Appointment Only</span>
           </div>
         </div>
         <div class="footer-socials" style="margin-top: 20px;">
@@ -865,6 +882,7 @@
   <!-- Sliders JavaScript File -->
   <script src="js/sliders.js"></script>
   
+
   <script>
     // Handle estimate request form submission
     const estForm = document.getElementById('estimate-request-form');
@@ -874,49 +892,48 @@
         const name = document.getElementById('est-name').value;
         const phone = document.getElementById('est-phone').value;
         const email = document.getElementById('est-email').value;
-        const service = document.getElementById('est-service').value;
-        const city = document.getElementById('est-city').value;
         const details = document.getElementById('est-details').value;
         
         console.log(`[ESTIMATE REQUEST] Routing to Brandon @ (479) 652-1424`);
-        console.log(`Lead Details: Name=${name}, Phone=${phone}, Service=${service}, City=${city}`);
+        console.log(`Lead Details: Name=${name}, Phone=${phone}, Email=${email}`);
         
-        // AJAX submission to Netlify Forms
-        const formData = new URLSearchParams();
-        formData.append("form-name", "estimate-request");
-        formData.append("name", name);
-        formData.append("phone", phone);
-        formData.append("email", email);
-        formData.append("service", service);
-        formData.append("city", city);
-        formData.append("details", details);
-        
-        // Add honeypot value if filled (usually blank)
-        const botField = estForm.querySelector('input[name="bot-field"]');
-        if (botField && botField.value) {
-          formData.append("bot-field", botField.value);
-        }
-
-        fetch("/", {
+        // AJAX submission to FormSubmit.co
+        fetch("https://formsubmit.co/ajax/ramosroofing.ar@icloud.com", {
           method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: formData.toString()
+          headers: { 
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({
+            "Form Name": "Estimate Quote Request",
+            "Name": name,
+            "Phone": phone,
+            "Email": email,
+            "Details": details,
+            "_subject": "New Estimate Request - Ramos Roofing Plus"
+          })
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("FormSubmit returned an error status.");
+          }
+          return response.json();
         })
         .then(() => {
-          console.log("Successfully submitted estimate request to Netlify Forms.");
+          console.log("Successfully submitted estimate request to FormSubmit.");
+          const card = estForm.parentElement;
+          card.innerHTML = `
+            <div style="text-align: center; padding: 40px 0;">
+              <i class="fas fa-check-circle" style="font-size: 3.5rem; color: var(--cta-primary); margin-bottom: 20px;"></i>
+              <h3 style="font-family: var(--font-headings); font-size: 1.8rem; margin-bottom: 12px; color: var(--text-primary);">Quote Request Received!</h3>
+              <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto; line-height: 1.6;">Thank you, ${name}. Brandon Ramos will review your request and text or call you at ${phone} within 24 hours.</p>
+            </div>
+          `;
         })
         .catch((error) => {
-          console.error("Netlify Form submission failed:", error);
+          console.error("FormSubmit submission failed:", error);
+          alert("Submission failed. This email address has not been activated on FormSubmit yet, or there was a connection error. Please make sure the owner clicks 'Activate Form' in the email from FormSubmit.co.");
         });
-        
-        const card = estForm.parentElement;
-        card.innerHTML = `
-          <div style="text-align: center; padding: 40px 0;">
-            <i class="fas fa-check-circle" style="font-size: 3.5rem; color: var(--cta-primary); margin-bottom: 20px;"></i>
-            <h3 style="font-family: var(--font-headings); font-size: 1.8rem; margin-bottom: 12px; color: var(--text-primary);">Quote Request Received!</h3>
-            <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto; line-height: 1.6;">Thank you, ${name}. Brandon Ramos will review your request for work in ${city} and text or call you at ${phone} within 24 hours.</p>
-          </div>
-        `;
       });
     }
   </script>

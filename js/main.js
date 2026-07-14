@@ -165,33 +165,30 @@ document.addEventListener('DOMContentLoaded', () => {
       const comments = document.getElementById('feedback-comments').value;
       const rating = ratingValueInput ? ratingValueInput.value : 'unknown';
 
-      console.log(`[PRIVATE FEEDBACK CAPTURE] Routing low rating alert (Rating: ${rating}/5) to Austin @ (479) 221-8420`);
+      console.log(`[PRIVATE FEEDBACK CAPTURE] Routing low rating alert (Rating: ${rating}/5) to Austin @ (479) 652-1169`);
       console.log(`Feedback Details - Name: ${name}, Phone: ${phone}, Comments: ${comments}`);
 
-      // AJAX submission to Netlify Forms
-      const formData = new URLSearchParams();
-      formData.append("form-name", "customer-feedback");
-      formData.append("name", name);
-      formData.append("phone", phone);
-      formData.append("comments", comments);
-      formData.append("rating", rating);
-      
-      // Add honeypot value if filled (usually blank)
-      const botField = actualForm.querySelector('input[name="bot-field"]');
-      if (botField && botField.value) {
-        formData.append("bot-field", botField.value);
-      }
-
-      fetch("/", {
+      // AJAX submission to FormSubmit.co
+      fetch("https://formsubmit.co/ajax/ramosroofing.ar@icloud.com", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: formData.toString()
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          "Form Name": "Customer Feedback (Low Rating)",
+          "Name": name,
+          "Phone": phone,
+          "Comments": comments,
+          "Rating": rating,
+          "_subject": "Alert: New Low Rating Private Feedback - Ramos Roofing Plus"
+        })
       })
       .then(() => {
-        console.log("Successfully submitted customer feedback to Netlify Forms.");
+        console.log("Successfully submitted customer feedback to FormSubmit.");
       })
       .catch((error) => {
-        console.error("Netlify Form submission failed:", error);
+        console.error("FormSubmit submission failed:", error);
       });
 
       const widgetCard = document.querySelector('.rating-widget-card');
