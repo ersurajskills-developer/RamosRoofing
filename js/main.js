@@ -16,6 +16,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // 2. Mobile Menu Toggle
   const hamburger = document.querySelector('.hamburger');
   const navMenu = document.querySelector('.nav-menu');
+
+  function closeMobileMenu() {
+    if (navMenu && navMenu.classList.contains('mobile-active')) {
+      navMenu.classList.remove('mobile-active');
+      if (hamburger) {
+        hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+      }
+    }
+  }
+
   if (hamburger && navMenu) {
     hamburger.addEventListener('click', () => {
       // Toggle menu visibility (class active)
@@ -37,7 +47,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     });
+
+    // Close mobile menu when clicking any nav link (excluding dropdown toggles)
+    const navLinks = navMenu.querySelectorAll('.nav-link, .dropdown-item, .mega-menu a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        const isDropdownToggle = link.classList.contains('nav-link') && 
+          (link.parentElement.classList.contains('dropdown') || link.parentElement.classList.contains('mega-dropdown')) && 
+          (href === '#' || !href);
+        
+        if (!isDropdownToggle) {
+          closeMobileMenu();
+        }
+      });
+    });
   }
+
+  // Close mobile menu when clicking "Request Service" button
+  const requestButtons = document.querySelectorAll('.btn-request');
+  requestButtons.forEach(btn => {
+    btn.addEventListener('click', closeMobileMenu);
+  });
 
   // 3. SMS Chat Widget Toggle & Submission
   const widgetTrigger = document.querySelector('.sms-widget-trigger');

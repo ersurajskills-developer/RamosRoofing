@@ -2873,6 +2873,13 @@ img {
   position: relative;
   padding: 90px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
+  scroll-margin-top: 90px;
+}
+
+@media (max-width: 1150px) {
+  #quote-form {
+    scroll-margin-top: 75px;
+  }
 }
 
 #quote-form .contact-info-panel h2 {
