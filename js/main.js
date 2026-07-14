@@ -64,10 +64,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Close mobile menu when clicking "Request Service" button
+  // Close mobile menu AND scroll directly to form card on mobile
   const requestButtons = document.querySelectorAll('.btn-request');
   requestButtons.forEach(btn => {
-    btn.addEventListener('click', closeMobileMenu);
+    btn.addEventListener('click', (e) => {
+      closeMobileMenu();
+      // On mobile, the layout stacks: text panel comes before the form card.
+      // So we scroll directly to the form card instead of the section top.
+      if (window.innerWidth <= 992) {
+        const formCard = document.getElementById('form-card');
+        if (formCard) {
+          e.preventDefault();
+          const headerHeight = document.querySelector('.main-header')?.offsetHeight || 75;
+          const top = formCard.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      }
+    });
   });
 
   // 3. SMS Chat Widget Toggle & Submission
