@@ -2859,6 +2859,11 @@ img {
 
   .contact-info-panel {
     padding-right: 0;
+    order: 2; /* push text panel below the form on mobile */
+  }
+
+  #form-card {
+    order: 1; /* pull form card to the top on mobile */
   }
 }
 
